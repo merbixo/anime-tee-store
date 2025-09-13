@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merbi's Anime Collection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="text-center p-6">
+    <h1 class="text-4xl font-bold neon">Merbi's Anime Collection</h1>
+    <p class="text-lg text-gray-300">Premium Anime-Inspired T-Shirts</p>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 grid md:grid-cols-3 gap-8">
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-6 hover:scale-105 transform transition cursor-pointer"
+         onclick="openCollection('naruto')">
+      <h2 class="text-2xl font-semibold">Naruto Series</h2>
+      <p class="text-gray-400">Ninja-inspired streetwear</p>
+    </div>
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-6 hover:scale-105 transform transition cursor-pointer"
+         onclick="openCollection('onepiece')">
+      <h2 class="text-2xl font-semibold">One Piece Collection</h2>
+      <p class="text-gray-400">Pirate legends on fabric</p>
+    </div>
+    <div class="bg-gray-800 rounded-2xl shadow-lg p-6 hover:scale-105 transform transition cursor-pointer"
+         onclick="openCollection('attackontitan')">
+      <h2 class="text-2xl font-semibold">Attack on Titan</h2>
+      <p class="text-gray-400">Colossal designs</p>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="collectionModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center">
+    <div class="bg-gray-800 rounded-2xl shadow-xl max-w-lg w-full p-6 relative">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-white">✖</button>
+      <h2 id="modalTitle" class="text-3xl font-bold mb-4"></h2>
+      <div id="modalContent"></div>
+      <button onclick="redirectToShopify()" class="mt-6 w-full bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">Shop Now</button>
+    </div>
+  </div>
+
+  <script>
+    const collections = {
+      naruto: {
+        title: "Naruto Series",
+        description: "Feel the ninja spirit with designs inspired by Konoha legends.",
+        items: ["Hokage Hoodie", "Sasuke Street Tee", "Akatsuki Oversize Shirt"]
+      },
+      onepiece: {
+        title: "One Piece Collection",
+        description: "Set sail with the Straw Hat crew in premium cotton.",
+        items: ["Luffy Gear 5 Shirt", "Zoro Katana Tee", "Chopper Cute Hoodie"]
+      },
+      attackontitan: {
+        title: "Attack on Titan",
+        description: "Defend humanity with designs from inside the Walls.",
+        items: ["Survey Corps Jacket Tee", "Colossal Titan Graphic", "Eren Transformation Hoodie"]
+      }
+    };
+
+    function openCollection(key) {
+      const col = collections[key];
+      document.getElementById("modalTitle").textContent = col.title;
+      document.getElementById("modalContent").innerHTML = `
+        <p class="text-gray-300 mb-4">${col.description}</p>
+        <ul class="space-y-2">
+          ${col.items.map(i => `<li class="flex items-center gap-2 text-gray-200">✅ ${i}</li>`).join('')}
+        </ul>`;
+      document.getElementById("collectionModal").classList.remove("hidden");
+      document.getElementById("collectionModal").classList.add("flex");
+    }
+
+    function closeModal() {
+      document.getElementById("collectionModal").classList.add("hidden");
+      document.getElementById("collectionModal").classList.remove("flex");
+    }
+
+    function redirectToShopify() {
+      window.open("https://your-shopify-store.com", "_blank");
+    }
+  </script>
+</body>
+</html>
